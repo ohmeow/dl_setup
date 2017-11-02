@@ -69,7 +69,9 @@ c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_notebook_config.py
 # create ssl cert for jupyter notebook
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/mykey.key -out $HOME/mycert.pem -subj "/C=IE"
 # save notebook startup command
-echo jupyter notebook --certfile=$HOME/mycert.pem --keyfile $HOME/mykey.key > $HOME/start-jupyter-notebook
+echo source activate fastai > $HOME/start-jupyter-notebook
+echo jupyter notebook --certfile=$HOME/mycert.pem --keyfile $HOME/mykey.key >> $HOME/start-jupyter-notebook
+echo source activate fastai > $HOME/start-jupyter-notebook
 chmod +x $HOME/start-jupyter-notebook
 
 # Uncomment the 3 lines below ONLY if you are following the guide for setting
