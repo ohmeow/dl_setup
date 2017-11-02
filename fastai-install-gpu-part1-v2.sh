@@ -80,7 +80,7 @@ chmod +x $HOME/start-jupyter-notebook
 #chmod +x $HOME/mount-workspace
 
 # Delete installation files
-rm -rf libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb install-gpu-part1-v2.sh cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb Anaconda3-5.0.1-Linux-x86_64.sh
+rm -rf libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb fastai-install-gpu-part1-v2.sh cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb Anaconda3-5.0.1-Linux-x86_64.sh
 
 # Start new shell for updates to PATH to take effect
 exec bash
