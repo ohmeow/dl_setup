@@ -73,6 +73,12 @@ c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_notebook_config.py
 # create ssl cert for jupyter notebook
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/mykey.key -out $HOME/mycert.pem -subj "/C=IE"
 
+# save notebook startup command
+echo source activate fastai > $HOME/start-jupyter-notebook
+echo jupyter notebook --certfile=$HOME/mycert.pem --keyfile $HOME/mykey.key >> $HOME/start-jupyter-notebook
+echo source activate fastai > $HOME/start-jupyter-notebook
+chmod +x $HOME/start-jupyter-notebook
+
 # create tmuxp config file to setup dev environment and start jupyter (start with > tmuxp load fastai)
 echo '{"session_name": "fastai","windows": [{' > $HOME/.tmuxp/fastai.json
 echo '"window_name": "dev window",' >> $HOME/.tmuxp/fastai.json
@@ -80,14 +86,10 @@ echo '"layout": "main-vertical",' >> $HOME/.tmuxp/fastai.json
 echo '"options": {"main-pane-width": 120},' >> $HOME/.tmuxp/fastai.json
 echo '"shell_command_before": [ "cd ~/development/_training/ml/fastai-course", "source activate fastai" ],' >> $HOME/.tmuxp/fastai.json
 echo '"panes": [' >> $HOME/.tmuxp/fastai.json
-echo '{"shell_command": ["clear"]},{"shell_command": ["clear","jupyter notebook"]},{"shell_command": ["clear","watch -n 0.5 nvidia-smi"]}' >> $HOME/.tmuxp/fastai.json
+echo '{"shell_command": ["clear"]},{"shell_command": ["clear","bash ./start-jupyter-notebook"]},{"shell_command": ["clear","watch -n 0.5 nvidia-smi"]}' >> $HOME/.tmuxp/fastai.json
 echo ']}]}' >> $HOME/.tmuxp/fastai.json
 
-# save notebook startup command
-# echo source activate fastai > $HOME/start-jupyter-notebook
-# echo jupyter notebook --certfile=$HOME/mycert.pem --keyfile $HOME/mykey.key >> $HOME/start-jupyter-notebook
-# echo source activate fastai > $HOME/start-jupyter-notebook
-# chmod +x $HOME/start-jupyter-notebook
+
 
 # Delete installation files
 rm -rf libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb fastai-install-gpu-part1-v2.sh cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb Anaconda3-5.0.1-Linux-x86_64.sh
