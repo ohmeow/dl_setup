@@ -13,4 +13,4 @@ done; echo " $state"
 
 # ssh into the instance
 export instance_ip=$(aws ec2 describe-instances --instance-ids $instance_id --output text --query 'Reservations[*].Instances[*].PublicIpAddress')
-ssh -i ~/.ssh/aws-key-or.pem ubuntu@$instance_ip -L 8888:127.0.0.1:8888
+ssh -i ~/.ssh/aws-key-or.pem ubuntu@$instance_ip -L 8889:127.0.0.1:8888
