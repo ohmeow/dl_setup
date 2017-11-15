@@ -89,8 +89,6 @@ echo '"panes": [' >> $HOME/.tmuxp/fastai.json
 echo '{"shell_command": ["clear"]},{"shell_command": ["clear","bash ./start-jupyter-notebook"]},{"shell_command": ["clear","watch -n 0.5 nvidia-smi"]}' >> $HOME/.tmuxp/fastai.json
 echo ']}]}' >> $HOME/.tmuxp/fastai.json
 
-
-
 # Delete installation files
 rm -rf libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb fastai-install-gpu-part1-v2.sh cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb Anaconda3-5.0.1-Linux-x86_64.sh
 
