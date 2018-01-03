@@ -83,7 +83,7 @@ chmod +x $HOME/start-jupyter-notebook
 # see below on using tmuxp and here documents in bash scripts (makes the below much cleaner):
 # http://tldp.org/LDP/abs/html/here-docs.html
 # http://forums.fast.ai/t/is-it-possible-to-save-tmux-sessions-in-between-aws-restarts/7763/3
-cat > fastai.yml <<tmuxp-config 
+cat > $HOME/.tmuxp/fastai.yml <<tmuxp-config 
 session_name: fastai
 windows:
 - window_name: dev window
