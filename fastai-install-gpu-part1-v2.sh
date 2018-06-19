@@ -1,15 +1,18 @@
 # This script is designed to work with ubuntu 16.04 LTS
+# see: http://files.fast.ai/setup/paperspace
 
 # ensure system is updated and has basic build tools
 sudo apt-get update
 sudo apt-get --assume-yes upgrade
 sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils unzip
 sudo apt-get --assume-yes install software-properties-common
+sudo apt-get --assume-yes install git
 
 # download and install GPU drivers
-wget "https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb"
-
-sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+#wget "https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb"
+#sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 sudo apt-get update
 sudo apt-get -y install cuda
@@ -17,6 +20,15 @@ sudo apt-get --assume-yes upgrade
 sudo apt-get --assume-yes autoremove
 sudo modprobe nvidia
 nvidia-smi
+
+# install cudnn libraries
+wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
+tar xf cudnn-9.1-linux-x64-v7.tgz
+sudo cp cuda/include/*.* /usr/local/cuda/include/
+sudo cp cuda/lib64/*.* /usr/local/cuda/lib64/
+# previous way we installed cudnn
+# wget "http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb"
+# sudo dpkg -i libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb
 
 # install Anaconda for current user
 wget "https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh"
@@ -26,10 +38,6 @@ echo "export PATH=\"$HOME/anaconda3/bin:\$PATH\"" >> ~/.bashrc
 export PATH="$HOME/anaconda3/bin:$PATH"
 conda install -y bcolz
 conda upgrade -y --all
-
-# install cudnn libraries
-wget "http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb"
-sudo dpkg -i libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb
 
 # install tensorflow
 conda install tensorflow
