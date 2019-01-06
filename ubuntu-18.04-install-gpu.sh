@@ -37,10 +37,12 @@ jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/mykey.key -out $HOME/mycert.pem -subj "/C=IE"
 
 # configure notebook
+# notes:
+#   1.  c.NotebookApp.ip used to be set to '*' (does not work anymore; have to set to '0.0.0.0')
 echo "c.NotebookApp.certfile = u'/home/{user}/mycert.pem'" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.keyfile = u'/home/{user}/mykey.key'" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.password = u'"$jupass"'" >> $HOME/.jupyter/jupyter_notebook_config.py
-echo "c.NotebookApp.ip = '*'" >> $HOME/.jupyter/jupyter_notebook_config.py
+echo "c.NotebookApp.ip = '0.0.0.0'" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_notebook_config.py
 #echo "c.NotebookApp.port = 9999" >> $HOME/.jupyter/jupyter_notebook_config.py
 
